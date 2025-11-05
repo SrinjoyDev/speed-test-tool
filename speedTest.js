@@ -9,7 +9,7 @@ import { promisify } from "util";
 
 const streamPipeline = promisify(pipeline);
 
-const DOWNLOAD_URL = "https://proof.ovh.net/files/10Mb.dat"; // ✅ working test file
+const DOWNLOAD_URL = "https://proof.ovh.net/files/10Mb.dat";
 const UPLOAD_URL = "https://postman-echo.com/post";
 
 function bitsToMbps(bits, seconds) {
@@ -30,12 +30,12 @@ async function testPing(url) {
   }
 
   const avg = times.reduce((a, b) => a + b, 0) / samples;
-  console.log(chalk.green(`🏓 Average Ping: ${avg.toFixed(2)} ms`));
+  console.log(chalk.green(`Average Ping: ${avg.toFixed(2)} ms`));
   return avg;
 }
 
 async function testDownload() {
-  console.log(chalk.blue("\n📥 Testing Download Speed..."));
+  console.log(chalk.blue("\nTesting Download Speed..."));
 
   const bar = new cliProgress.SingleBar(
     { format: "Downloading [{bar}] {percentage}% | {speed} Mbps" },
@@ -68,12 +68,12 @@ async function testDownload() {
   bar.stop();
   const duration = (performance.now() - start) / 1000;
   const speedMbps = bitsToMbps(bytes * 8, duration);
-  console.log(chalk.green(`✅ Download Speed: ${speedMbps} Mbps`));
+  console.log(chalk.green(`Download Speed: ${speedMbps} Mbps`));
   return speedMbps;
 }
 
 async function testUpload() {
-  console.log(chalk.blue("\n📤 Testing Upload Speed..."));
+  console.log(chalk.blue("\nTesting Upload Speed..."));
   const bar = new cliProgress.SingleBar(
     { format: "Uploading [{bar}] {percentage}% | {speed} Mbps" },
     cliProgress.Presets.shades_classic
@@ -97,18 +97,18 @@ async function testUpload() {
 
   bar.update(100, { speed: speedMbps });
   bar.stop();
-  console.log(chalk.green(`✅ Upload Speed: ${speedMbps} Mbps`));
+  console.log(chalk.green(`Upload Speed: ${speedMbps} Mbps`));
   return speedMbps;
 }
 
 async function run() {
-  console.log(chalk.cyan.bold("\n🌐 Internet Speed Test CLI\n"));
+  console.log(chalk.cyan.bold("\nInternet Speed Test CLI\n"));
 
   const ping = await testPing("https://google.com");
   const download = await testDownload();
   const upload = await testUpload();
 
-  console.log(chalk.yellow("\n📊 Final Results:"));
+  console.log(chalk.yellow("\nFinal Results:"));
   console.log(chalk.white("-------------------------"));
   console.log(chalk.white(`Ping: ${ping.toFixed(2)} ms`));
   console.log(chalk.white(`Download: ${download} Mbps`));
