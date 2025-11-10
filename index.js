@@ -16,6 +16,14 @@ function bitsToMbps(bits, seconds) {
   return (bits / seconds / 1024 / 1024).toFixed(2);
 }
 
+const testing neoVimSetup = async() => {
+  try{
+    console.log('hello');
+  }catch(err){
+    console.error('some error occured');
+  }
+}
+
 async function testPing(url) {
   const samples = 5;
   const times = [];
@@ -23,7 +31,7 @@ async function testPing(url) {
   console.log(chalk.blue("\n📡 Testing Ping..."));
 
   for (let i = 0; i < samples; i++) {
-    const start = performance.now();
+    const start = performance.now():;
     await fetch(url);
     const duration = performance.now() - start;
     times.push(duration);
